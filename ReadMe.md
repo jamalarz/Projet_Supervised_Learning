@@ -1,16 +1,14 @@
 ![logo_Paris_Descartes](https://upload.wikimedia.org/wikipedia/fr/d/de/Logo_Paris_Descartes.png)
-# EXPLORATION VISUELLE DES DONNÉES
+# Supervised Learning
 
 
-##  Mise en œuvre des méthodes de visualisation sur données réelles
+##  Mise en œuvre des méthodes d'Apprentissage Supervisé
 
 
 
 ### Auteurs :
-*  Soufiane Fhiyil (@soufiane95)
-*  Mouhda Mohammed Reda (@rida-mh)
 *  Jamal Aourraz (@jamalarz)
 
 
 
-### December 2018
+### Janvier 2019
