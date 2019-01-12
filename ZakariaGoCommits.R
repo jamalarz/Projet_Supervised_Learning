@@ -27,14 +27,9 @@ summary(data$Class)
 data_balanced = ovun.sample(Class~.,data = data, method = "under",
                            p = 0.5,seed = 1)$data
 
-
 summary(data_balanced$Class)
 
-
 str(data_balanced)
-
-
-
 
 ### Train and test Splitting
 
