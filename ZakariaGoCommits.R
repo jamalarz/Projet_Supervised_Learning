@@ -1,4 +1,4 @@
-### UPDATES : LOGISTIC RESGRESSION, .. 
+### UPDATES : LOGISTIC RESGRESSION, CART RANDOM FORREST ..
 
 library(FactoMineR) #PCA
 library(MASS) #QDA & LNR
@@ -12,7 +12,13 @@ library(stats)# LGR
 
 library(ROSE)  # Library that solves imbalanced data issues.
 
+## Libraries to display Tree Model 
 
+# library(rattle) 
+# library(RColorBrewer) 
+
+
+#### RE TAKE AFTER DATA EXPLORATION IN JUPYTER NOTEBOOK. #### 
 
 data[1:10,]
 
@@ -56,3 +62,35 @@ lm.cf=length(which(fit.pred==Data_test$Class))
 lm.cf=lm.cf/nrow(Data_test)
 
 lm.cf
+
+##### CART RANDOM FORREST #####
+
+# trainIndex <- createDataPartition(Class,p=0.7,list = FALSE,times = 1)
+
+Sampeled_data=sample(nrow(data_balanced),round(nrow(data_balanced)*0.75),replace = FALSE)
+
+Data_train=data_balanced[Sampeled_data,];
+
+Data_test=data_balanced[-Sampeled_data,];
+
+r.ctrl <- rpart.control(minsplit = 100,
+                        minbucket = 10,
+                        cp = 0,
+                        xval = 10
+)
+
+cart.train <- Data_train
+names(cart.train)
+
+m1 <- rpart(formula = Class~.,
+            data = cart.train[,-c(1,11)],
+            method = "class",
+            control = r.ctrl
+)
+
+
+##  fancyRpartPlot(m1)   ; ## Display tree model
+
+
+printcp(m1) 
+plotcp(m1) 
