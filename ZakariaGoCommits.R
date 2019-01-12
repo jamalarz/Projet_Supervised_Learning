@@ -67,12 +67,6 @@ lm.cf
 
 # trainIndex <- createDataPartition(Class,p=0.7,list = FALSE,times = 1)
 
-Sampeled_data=sample(nrow(data_balanced),round(nrow(data_balanced)*0.75),replace = FALSE)
-
-Data_train=data_balanced[Sampeled_data,];
-
-Data_test=data_balanced[-Sampeled_data,];
-
 r.ctrl <- rpart.control(minsplit = 100,
                         minbucket = 10,
                         cp = 0,
