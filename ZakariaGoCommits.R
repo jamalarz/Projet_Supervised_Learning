@@ -82,15 +82,15 @@ r.ctrl <- rpart.control(minsplit = 100,
 cart.train <- Data_train
 names(cart.train)
 
-m1 <- rpart(formula = Class~.,
+model_t <- rpart(formula = Class~.,
             data = cart.train[,-c(1,11)],
             method = "class",
             control = r.ctrl
 )
 
 
-##  fancyRpartPlot(m1)   ; ## Display tree model
+##  fancyRpartPlot(model_t)   ; ## Display tree model
 
 
-printcp(m1) 
-plotcp(m1) 
+printcp(model_t) 
+plotcp(model_t) 
