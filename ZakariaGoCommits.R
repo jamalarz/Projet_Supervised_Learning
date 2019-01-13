@@ -8,6 +8,8 @@ library(class) #KNN
 library(randomForest) #RF
 library(stats)# LGR
 
+library(caret)
+
 ####
 
 library(ROSE)  # Library that solves imbalanced data issues.
@@ -31,7 +33,7 @@ summary(data$Class)
 #### Over-coming the Problem of Imbalanced Data
 
 data_balanced = ovun.sample(Class~.,data = data, method = "under",
-                           p = 0.5,seed = 1)$data
+                            p = 0.5,seed = 1)$data
 
 summary(data_balanced$Class)
 
@@ -47,7 +49,7 @@ Data_train=data_balanced[Sampeled_data,];
 
 Data_test=data_balanced[-Sampeled_data,];
 
-## Fitting LR Model
+## Fitting LR Model 
 
 fit.lm=glm(Class~., data = Data_train, family = binomial)
 
@@ -65,26 +67,33 @@ lm.cf
 
 ##### CART RANDOM FORREST #####
 
-# trainIndex <- createDataPartition(Class,p=0.7,list = FALSE,times = 1)
+trainIndex <- createDataPartition(data$Class,p=0.7,list = FALSE,times = 1)
 
-r.ctrl <- rpart.control(minsplit = 100,
-                        minbucket = 10,
-                        cp = 0,
-                        xval = 10
-)
+train.data <- data_balanced[trainIndex, ]
 
-cart.train <- Data_train
-names(cart.train)
+test.data  <- data_balanced[-trainIndex,]
 
-model_t <- rpart(formula = Class~.,
+
+dim(train.data)
+
+dim(test.data)
+
+table(train.data$Class) 
+
+table(test.data$Class)
+
+
+m1 <- rpart(formula = Class~.,
             data = cart.train[,-c(1,11)],
             method = "class",
             control = r.ctrl
 )
 
 
-##  fancyRpartPlot(model_t)   ; ## Display tree model
+printcp(m1) 
 
 
-printcp(model_t) 
-plotcp(model_t) 
+##  fancyRpartPlot(m1)   ; ## Display tree model
+
+
+plotcp(m1) 
