@@ -8,7 +8,7 @@ library(class) #KNN
 library(randomForest) #RF
 library(stats)# LGR
 
-library(caret)
+library(caret) ## 
 
 ####
 
@@ -67,23 +67,39 @@ lm.cf
 
 ##### CART RANDOM FORREST #####
 
-trainIndex <- createDataPartition(data$Class,p=0.7,list = FALSE,times = 1)
+Sampeled_data=sample(nrow(data_balanced),round(nrow(data_balanced)*0.75),replace = FALSE)
 
-train.data <- data_balanced[trainIndex, ]
+Data_train=data_balanced[Sampeled_data,];
 
-test.data  <- data_balanced[-trainIndex,]
+Data_test=data_balanced[-Sampeled_data,];
 
+dim(Data_train)
 
-dim(train.data)
-
-dim(test.data)
-
-table(train.data$Class) 
-
-table(test.data$Class)
+dim(Data_test)
 
 
-## m1 <- rpart(formula = Class~., data = cart.train[,-c(1,11)], method = "class", control = r.ctrl)
+table(Data_train$Class) 
+
+table(Data_test$Class)
+
+
+r.ctrl <- rpart.control(minsplit = 100,
+                        minbucket = 10,
+                        cp = 0,
+                        xval = 10
+)
+
+
+cart.train <- Data_train
+names(cart.train)
+
+
+m1 <- rpart(formula = Data_train$Class~.,
+            data = cart.train,
+            method = "class",
+            control = r.ctrl
+)
+
 
 
 printcp(m1) 
@@ -93,3 +109,6 @@ printcp(m1)
 
 
 plotcp(m1) 
+
+
+###################### QDA #####################
