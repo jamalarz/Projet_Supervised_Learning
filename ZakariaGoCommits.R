@@ -83,11 +83,7 @@ table(train.data$Class)
 table(test.data$Class)
 
 
-m1 <- rpart(formula = Class~.,
-            data = cart.train[,-c(1,11)],
-            method = "class",
-            control = r.ctrl
-)
+## m1 <- rpart(formula = Class~., data = cart.train[,-c(1,11)], method = "class", control = r.ctrl)
 
 
 printcp(m1) 
